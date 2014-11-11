@@ -61,7 +61,9 @@ def add():
 		# return redirect(url_for('add'))
 		return "success"
 
-
+@app.route('/admin')
+def admin():
+	return render_template('admin.html')
 if __name__=="__main__":
 	app.debug = True
 	app.run()
