@@ -3,7 +3,7 @@
 
 # imports
 import sqlite3
-from flask import Flask,render_template,request,url_for,g
+from flask import Flask,render_template,request,url_for,g,redirect
 from contextlib import closing
 
 # configuration
@@ -55,9 +55,11 @@ def add():
 		sql = 'insert into paper values(?,?,?,?,?,?,?,?,?)'
 		data = [request.form['alias'], request.form['papername'], request.form['type'], request.form['content'], request.form['optiona'], request.form['optionb'], request.form['optionc'], request.form['optiond'], request.form['answer']]
 		g.db.cursor().execute(sql,data)
-		g.db.commit()
 		# 题目信息计入数据库
-		return 'success'
+		g.db.commit()
+		# 重定向 新增页面
+		# return redirect(url_for('add'))
+		return "success"
 
 
 if __name__=="__main__":
