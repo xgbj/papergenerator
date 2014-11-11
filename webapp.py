@@ -18,6 +18,11 @@ app.config.from_object(__name__)
 def connect_db():
 	return sqlite3.connect(app.config['DATABASE'])
 
+# database initialize for CLI
+# Usage: 
+# >>> import webapp.py
+# >>> webapp.init_db()
+
 def init_db():
 	with closing(connect_db()) as db:
 		with app.open_resource('schema.sql',mode='r') as f:
@@ -39,8 +44,8 @@ def teardown_request(exception):
 def hello():
 	return render_template('main.html')
 
-@app.route('/<paper>/<alias>')
-def generate(paper,alias):
+@app.route('/<alias>/<paper>')
+def generate(alias,paper):
 	# 从服务器生成数据
 	sql = 'select * from paper where alias="'+alias+'" and papername="'+paper+'" order by number'
 	cur = g.db.cursor().execute(sql)
