@@ -60,10 +60,10 @@ def add():
 		# 重定向 新增页面
 		# return redirect(url_for('add'))
 		return "success"
-
-@app.route('/result',methods=['POST'])
+	
+@app.route('/result', methods=['POST'])
 def result():
-	return "heh";
+	return 'hehe';
 
 @app.route('/admin')
 def admin():

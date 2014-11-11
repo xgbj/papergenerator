@@ -59,13 +59,13 @@
 			    <div class="radio">
 				  <label>
 				    <input type="radio" name="{{paper.number}}" value="A" checked>
-				    对
+				    我赞成这种说法
 				  </label>
 				</div>
 				<div class="radio">
 				  <label>
 				    <input type="radio" name="{{paper.number}}" value="B">
-				    错
+				    不赞同这种说法
 				  </label>
 				</div>
 			</div>
@@ -81,12 +81,24 @@
 		  </div>
 		  {% endif %}
 		  {% endfor %}
-
-		  <button type="submit" class="btn btn-default">Submit</button>
+		  <hr/>
+		  <div class="row">
+		  <div class="form-group col-sm-4">
+		    <label for="inputName">怎么称呼您？</label>
+		    <input type="email" class="form-control" name="name" id="inputName" placeholder="请输入您的微博账号或者真实姓名">
+		    <br/>
+		 	<button type="submit" class="btn btn-success">提交</button>
+		  </div>
+		  </div>
 		</form>
 		{% else %}
 		  <div class="alert alert-danger" role="alert">抱歉，您的问答卷找不到了</div>
 		{% endif %}
+		<hr/>
+		<div class="row text-center">
+		&copy; Carpela  新浪第三方应用 <kbd>问～答</kbd> 专用设计
+		</div>
+		<br/>
 	</div>
 </body>
 </html>
