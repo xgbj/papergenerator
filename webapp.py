@@ -42,9 +42,9 @@ def hello():
 @app.route('/<paper>/<alias>')
 def generate(paper,alias):
 	# 从服务器生成数据
-	sql = 'select type,content,optiona,optionb,optionc,optiond,answer from paper where alias="'+alias+'" and papername="'+paper+'"'
+	sql = 'select * from paper where alias="'+alias+'" and papername="'+paper+'"'
 	cur = g.db.cursor().execute(sql)
-	data = [dict(type=row[0], content=row[1], optiona=row[2], optionb=row[3], optionc=row[4], optiond=row[5]) for row in cur.fetchall()]
+	data = [dict(alias=row[0], papername=row[1], number=row[2], type=row[3], content=row[4], optiona=row[5], optionb=row[6], optionc=row[7], optiond=row[8]) for row in cur.fetchall()]
 	return render_template('paper.html',data = data)
 
 @app.route('/add',methods=['POST','GET'])
@@ -52,8 +52,8 @@ def add():
 	if request.method == 'GET':
 		return render_template('newpaper.html')
 	else:
-		sql = 'insert into paper values(?,?,?,?,?,?,?,?,?)'
-		data = [request.form['alias'], request.form['papername'], request.form['type'], request.form['content'], request.form['optiona'], request.form['optionb'], request.form['optionc'], request.form['optiond'], request.form['answer']]
+		sql = 'insert into paper values(?,?,?,?,?,?,?,?,?,?)'
+		data = [request.form['alias'], request.form['papername'], request.form['number'], request.form['type'], request.form['content'], request.form['optiona'], request.form['optionb'], request.form['optionc'], request.form['optiond'], request.form['answer']]
 		g.db.cursor().execute(sql,data)
 		# 题目信息计入数据库
 		g.db.commit()
@@ -64,6 +64,7 @@ def add():
 @app.route('/admin')
 def admin():
 	return render_template('admin.html')
+
 if __name__=="__main__":
 	app.debug = True
 	app.run()
