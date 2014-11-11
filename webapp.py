@@ -63,7 +63,24 @@ def add():
 	
 @app.route('/result', methods=['POST'])
 def result():
-	return 'hehe';
+	papername = request.form['papername']
+	alias = request.form['alias']
+	sql = 'select number,answer,type from paper where alias="'+alias+'" and papername="'+papername+'" order by number'
+	cur = g.db.cursor().execute(sql)
+	num = 1
+	right = 0
+	for row in cur.fetchall():
+		num = num + 1
+		# row[0] --> number  row[1] --> answer row[2] --> 
+		if row[2] == 1:
+			# 有关简答题的评判标准，请在下面书写
+			if request.form[row[0].__str__()].__len__() != 0:
+				right = right + 1
+		else:
+			if request.form[row[0].__str__()] == row[1]:
+				right = right + 1
+	score = right * 100.0 / num
+	return alias+":"+score.__str__()+"%"
 
 @app.route('/admin')
 def admin():

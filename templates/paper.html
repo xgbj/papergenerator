@@ -15,10 +15,12 @@
 		<br/>
 		{% if data.__len__() != 0 %}
 	  	<form role="form" action="{{ url_for('result') }}" method="post">
+	  	  <input name="alias" value="{{ data[0].alias }}" hidden>
+	  	  <input name="papername" value="{{ data[0].papername }}" hidden>
 	  	  {% for paper in data %}
 	  	  <h3>题目{{ paper.number }}</h3>
 	  	  <br>
-	  	  {% if paper.type==0 %}
+	  	  {% if paper.type==4 %}
 		  <div class="form-group panel panel-default">
 		  	<div class="panel-heading">
 		    	<h4> {{ paper.content }}</h4>
@@ -50,7 +52,7 @@
 				</div>
 			</div>
 		  </div>
-		  {% elif paper.type==1 %}
+		  {% elif paper.type==2 %}
 		  <div class="form-group panel panel-success">
 		  	<div class="panel-heading">
 		    	<h4> {{ paper.content }}</h4>
@@ -58,13 +60,13 @@
 		    <div class="panel-body">
 			    <div class="radio">
 				  <label>
-				    <input type="radio" name="{{paper.number}}" value="A" checked>
+				    <input type="radio" name="{{paper.number}}" value="yes" checked>
 				    我赞成这种说法
 				  </label>
 				</div>
 				<div class="radio">
 				  <label>
-				    <input type="radio" name="{{paper.number}}" value="B">
+				    <input type="radio" name="{{paper.number}}" value="no">
 				    不赞同这种说法
 				  </label>
 				</div>
@@ -85,7 +87,7 @@
 		  <div class="row">
 		  <div class="form-group col-sm-4">
 		    <label for="inputName">怎么称呼您？</label>
-		    <input type="email" class="form-control" name="name" id="inputName" placeholder="请输入您的微博账号或者真实姓名">
+		    <input type="text" class="form-control" name="name" id="inputName" placeholder="请输入您的微博账号或者真实姓名">
 		    <br/>
 		 	<button type="submit" class="btn btn-success">提交</button>
 		  </div>
