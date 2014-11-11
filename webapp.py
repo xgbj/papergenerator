@@ -20,7 +20,7 @@ def connect_db():
 
 def init_db():
 	with closing(connect_db()) as db:
-		with app.open_source('schema.sql',mode='r') as f:
+		with app.open_resource('schema.sql',mode='r') as f:
 			db.cursor().executescript(f.read())
 		db.commit()
 
@@ -42,7 +42,7 @@ def hello():
 @app.route('/<paper>/<alias>')
 def generate(paper,alias):
 	# 从服务器生成数据
-	sql = 'select * from paper where alias="'+alias+'" and papername="'+paper+'"'
+	sql = 'select * from paper where alias="'+alias+'" and papername="'+paper+'" order by number'
 	cur = g.db.cursor().execute(sql)
 	data = [dict(alias=row[0], papername=row[1], number=row[2], type=row[3], content=row[4], optiona=row[5], optionb=row[6], optionc=row[7], optiond=row[8]) for row in cur.fetchall()]
 	return render_template('paper.html',data = data)
@@ -60,6 +60,10 @@ def add():
 		# 重定向 新增页面
 		# return redirect(url_for('add'))
 		return "success"
+
+@app.route('/result',methods=['POST'])
+def result():
+	return "heh";
 
 @app.route('/admin')
 def admin():

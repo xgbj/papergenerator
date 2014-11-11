@@ -5,9 +5,9 @@ create table paper (
   `number` integer not null,
   type integer not null,
   content text not null,
-  optiona text not null,
-  optionb text not null,
-  optionc text not null,
-  optiond text not null,
+  optiona text,
+  optionb text,
+  optionc text,
+  optiond text,
   answer text not null
 );
