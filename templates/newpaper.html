@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 	<title>出题</title>
 </head>
 <body>
-	<h1>出题页面</h1>
-	<form action="{{ url_for('add') }}" method="post">
+	<form class="form-inline" action="{{ url_for('add') }}" method="post">
 		<input type="text" name="alias">
 		<input type="text" name="papername">
 		<input type="text" name="type">
@@ -18,5 +22,7 @@
 		<input type="text" name="answer">
 		<button type="submit">
 	</form>
+
+
 </body>
 </html>
