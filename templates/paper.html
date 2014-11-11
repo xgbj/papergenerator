@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>问～答</title>
+</head>
+<body>
+	<h1>Your Paper Here</h1>
+	 <ul class=entries>
+	  {% for paper in data %}
+	    <li><h2>{{ paper.type }}</h2>{{ paper.content|safe }}
+	  {% else %}
+	    <li><em>Unbelievable.  No entries here so far</em>
+	  {% endfor %}
+	  </ul>
+	<a href="{{ url_for('add') }}">link</a>
+</body>
+</html>

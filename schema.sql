@@ -1,6 +1,12 @@
-drop table if exists entries;
-create table entries (
-  id integer primary key autoincrement,
-  title text not null,
-  text text not null
+drop table if exists paper;
+create table paper (
+  alias text not null,
+  papername text not null,
+  type integer not null,
+  content text not null,
+  optiona text not null,
+  optionb text not null,
+  optionc text not null,
+  optiond text not null,
+  answer text not null
 );
