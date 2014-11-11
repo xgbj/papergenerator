@@ -43,7 +43,6 @@ def hello():
 def generate(paper,alias):
 	# 从服务器生成数据
 	sql = 'select type,content,optiona,optionb,optionc,optiond,answer from paper where alias="'+alias+'" and papername="'+paper+'"'
-	# return sql
 	cur = g.db.cursor().execute(sql)
 	data = [dict(type=row[0], content=row[1], optiona=row[2], optionb=row[3], optionc=row[4], optiond=row[5]) for row in cur.fetchall()]
 	return render_template('paper.html',data = data)
@@ -53,6 +52,11 @@ def add():
 	if request.method == 'GET':
 		return render_template('newpaper.html')
 	else:
+		sql = 'insert into paper values(?,?,?,?,?,?,?,?,?)'
+		data = [request.form['alias'], request.form['papername'], request.form['type'], request.form['content'], request.form['optiona'], request.form['optionb'], request.form['optionc'], request.form['optiond'], request.form['answer']]
+		g.db.cursor().execute(sql,data)
+		g.db.commit()
+		# 题目信息计入数据库
 		return 'success'
 
 
