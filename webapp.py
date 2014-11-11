@@ -37,7 +37,7 @@ def teardown_request(exception):
 # application
 @app.route('/')
 def hello():
-	return 'hello,world'
+	return render_template('main.html')
 
 @app.route('/<paper>/<alias>')
 def generate(paper,alias):
